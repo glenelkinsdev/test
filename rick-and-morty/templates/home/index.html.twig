@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body  %}
+<h1>Welcome To Rick &amp; Morty Encyclopedia!</h1>
+<p>Begin by searching for a character, or visit our <a href="{{ path('catalog.index') }}">character catalog</a>.</p>
+    {{ form_start(form) }}
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+    {{ form_end(form,{'render_rest': false}) }}
+{% endblock %}

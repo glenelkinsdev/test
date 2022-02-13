@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+<div class="mb-3">
+    {{ form_label(form.name) }}
+    {{ form_widget(form.name) }}
+</div>
+<div class="mb-3">
+    {{ form_label(form.gender) }}
+    {{ form_widget(form.gender) }}
+</div>
+<div class="mb-3">
+    {{ form_label(form.status) }}
+    {{ form_widget(form.status) }}
+</div>
+<div class="mb-3">
+    {{ form_label(form.species) }}
+    {{ form_widget(form.species) }}
+</div>
+{{ form_widget(form.submit) }}
+{{ form_end(form) }}

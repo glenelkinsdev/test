@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body  %}
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-header">
+                    Search Characters
+                </div>
+                <div class="card-body">
+                    {% include 'shared/filter_form.html.twig' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    Episodes For {{ character.name }}
+                </div>
+                <div class="card-body">
+                    {% if episodes %}
+                        {% for episode in episodes %}
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <h3 class="h3">{{ episode.name }}</h3>
+                                    <p>Aired: {{ episode.airDate.format('d/m/Y') }}</p>
+                                    <p>Code: {{ episode.code }}</p>
+                                    <p>Url: <a href="{{ episode.url }}">{{ episode.url }}</a></p>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning">
+                            No Episodes Were Found
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

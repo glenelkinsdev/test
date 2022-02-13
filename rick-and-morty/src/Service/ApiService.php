@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Dto\CharacterDto;
 use App\Dto\EpisodeDto;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -73,7 +74,7 @@ class ApiService
         // response object
         $response = (object)[
             'success'=>true,
-            'code'=>200,
+            'code'=>Response::HTTP_OK,
             'error'=>'',
             'data'=>[]
         ];
@@ -94,11 +95,11 @@ class ApiService
                 $response->code = $httpResponse->getStatusCode();
 
                 // check the code
-                if($response->code === 429){
+                if($response->code === Response::HTTP_TOO_MANY_REQUESTS){
                     // rate limit applied
                     $response->error = 'Rate Limits In Effect';
                     $response->success = false;
-                }elseif($response->code === 200){
+                }elseif($response->code === Response::HTTP_OK){
 
                     // success - get array of data
                     try {
@@ -109,7 +110,7 @@ class ApiService
                         return $response;
                     }
 
-                }elseif($response->code === 404) {
+                }elseif($response->code === Response::HTTP_NOT_FOUND) {
                     // content not found
                     $response->error = 'Content Not Found';
                     $response->success = false;
